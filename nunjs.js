@@ -24,6 +24,8 @@ Nunjs = {
 	}
 };
 
+_events = {};
+
 window.$ = function(selector) {
 	var dom = 'string' == typeof selector ? document.querySelectorAll(selector) : selector;
 	var nunjs = {
@@ -37,10 +39,10 @@ window.$ = function(selector) {
 		},
 		attr: function(attr, value) {
 			if (value === null || value === undefined) {
-				return dom[0][attr];
+				return this[0].getAttribute(attr);
 			} else {
 				this.each(dom, function() {
-					this[attr] = value;
+					this.setAttribute(attr, value);
 				});
 				return this;
 			}
@@ -88,14 +90,13 @@ window.$ = function(selector) {
 			return this;
 		},
 		is: function(selector) {
-			return Nunjs.matches(dom[0], selector);
+			return Nunjs.matches(this[0], selector);
 		},
 		off: function(event, trigger) {
 			this.each(function() {
 				if (trigger === undefined) {
-					var listeners = getEventListeners(this);
-					for (var i = 0; i < listeners[event].length; i++) {
-						this.removeEventListener(event, listeners[event][i].listener);
+					for (var i = 0; i < _events[this][event].length; i++) {
+						this.removeEventListener(event, _events[this][event][i]);
 					}
 				} else {
 					this.removeEventListener(event, trigger);
@@ -105,6 +106,9 @@ window.$ = function(selector) {
 		},
 		on: function(event, trigger) {
 			this.each(function() {
+				if (!(this in _events)) _events[this] = {};
+				if (!(event in _events[this])) _events[this][event] = [];
+				_events[this][event].push(trigger);
 				this.addEventListener(event, trigger);
 			});
 			return this;
@@ -153,18 +157,37 @@ window.$ = function(selector) {
 			this.each(function() {
 				this.style.display == 'none' && (this.style.display = '');
 				if (getComputedStyle(this, '').getPropertyValue('display') == 'none')
-					this.style.display = defaultDisplay(this.nodeName);
+					this.style.display = 'block';
 			});
 			return this;
 		},
-		toggle: function() {
-			var show = dom[0].style.display === 'none';
+		submit: function() {
 			this.each(function() {
-				show ? el.show() : el.hide();
+				this.submit();
+			});
+		},
+		text: function(content) {
+			var resultText = "";
+			this.each(function() {
+				if (content === undefined)
+					resultText += this.textContent;
+				else
+					this.textContent = content;
+			});
+			if (content === undefined) {
+				return resultText;
+			}
+			return this;
+		},
+		toggle: function() {
+			var show = getComputedStyle(this[0], '').getPropertyValue('display') == 'none';
+			this.each(function() {
+				show ? $(this).show() : $(this).hide();
 			});
 			return this;
 		}
 	};
+	nunjs.length = 0;
 	Nunjs.each(dom, function(i, el) {
 		nunjs[i] = el;
 		nunjs.length = i;

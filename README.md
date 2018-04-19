@@ -110,9 +110,26 @@ _since 0.0.1_
 
 Restores default value of `display` on all elements.
 
+##### submit
+_since 0.0.1_
+
+`submit()` -> `self`
+
+Performs submit.
+
+##### text
+_since 0.0.1_
+
+`text()` -> `string`
+`text(content)` -> `self`
+
+Gets of sets the text content of elements in the collection. If no content is defined, it returns the text contents of all elements, otherwise it replaces the text content of each elements.
+
 ##### toggle
 _since 0.0.1_
 
 `toggle()` -> `self`
 
 Toggles between showing and hiding of the elements based on their on `display` property of first element in collection.
+
+![](http://pbfcomics.com/wp-content/uploads/2016/04/PBF145-Nunez.jpg)
