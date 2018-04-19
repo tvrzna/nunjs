@@ -14,11 +14,17 @@ Nunjs = {
 		}
 		return obj;
 	},
+	includes: function(arr, el) {
+		if (arr && el) {
+			return arr.indexOf(el) >= 0;
+		}
+		return false;
+	},
 	matches: function(obj, selector) {
 		if (!selector || !obj || obj.nodeType !== 1) return false;
 		var matchesSelector = obj.matches || obj.webkitMatchesSelector ||
 								obj.mozMatchesSelector || obj.oMatchesSelector ||
-								obj.matchesSelector;
+								obj.matchesSelector || obj.msMatchesSelector;
 		if (matchesSelector) return matchesSelector.call(obj, selector);
 		return false;
 	}
@@ -68,7 +74,7 @@ window.$ = function(selector) {
 			this.each(function() {
 				var data = this.querySelectorAll(selector);
 				for(var i=0; i < data.length; i++) {
-					if (!result.includes(data[i]))
+					if (!Nunjs.includes(result, data[i]))
 						result.push(data[i]);
 				}
 			});
@@ -119,17 +125,17 @@ window.$ = function(selector) {
 				if (el.parentElement === undefined)
 					return;
 
-				if (!selector && !result.includes(el.parentElement))
+				if (!selector && !Nunjs.includes(result, el.parentElement))
 					result.push(el.parentElement);
 
 				if (selector) {
-					if (Nunjs.matches(el.parentElement, selector) && !result.includes(el.parentElement)) {
+					if (Nunjs.matches(el.parentElement, selector) &&  !Nunjs.includes(result, el.parentElement)) {
 						result.push(el.parentElement);
 					} else if(!Nunjs.matches(el, selector)) {
 						var parent = el.parentElement;
 						do {
 							if (Nunjs.matches(parent, selector)) {
-								if (!result.includes(parent))
+								if (!Nunjs.includes(result, parent))
 									result.push(parent);
 								break;
 							}
@@ -165,6 +171,7 @@ window.$ = function(selector) {
 			this.each(function() {
 				this.submit();
 			});
+			return this;
 		},
 		text: function(content) {
 			var resultText = "";
