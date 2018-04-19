@@ -165,6 +165,7 @@ window.$ = function(selector) {
 			this.each(function() {
 				this.submit();
 			});
+			return this;
 		},
 		text: function(content) {
 			var resultText = "";
