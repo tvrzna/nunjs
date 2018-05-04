@@ -1,7 +1,7 @@
 /* nunjs 0.0.2 */
 Nunjs = {
 	each: function(obj, callback) {
-	var length, i = 0;
+		var length, i = 0;
 		if (Array.isArray(obj) || obj instanceof NodeList) {
 			length = obj.length;
 			for (; i < length; i++ ) {
@@ -192,6 +192,16 @@ window.$ = function(selector) {
 				show ? $(this).show() : $(this).hide();
 			});
 			return this;
+		},
+		val: function(value) {
+			if (value === undefined) {
+				return this[0].value;
+			} else {
+				this.each(function() {
+					this.value = value;
+				});
+				return this;
+			}
 		}
 	};
 	nunjs.length = 0;

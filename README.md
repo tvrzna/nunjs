@@ -14,17 +14,24 @@ Add class to each element.
 ##### ajax
 _since 0.0.2_
 
-`ajax(options)`
+`ajax(options)` -> `xhttp`
 
 Performs an Ajax request.
 
 `async` boolean, default `true`
+
 `complete` function
+
 `data` string
+
 `error` function(xhttp)
+
 `headers` {}
+
 `success` function(responseText, xhttp)
+
 `type` string, default `GET`
+
 `url` string
 
 ##### attr
@@ -137,6 +144,7 @@ Performs submit.
 _since 0.0.1_
 
 `text()` -> `string`
+
 `text(content)` -> `self`
 
 Gets of sets the text content of elements in the collection. If no content is defined, it returns the text contents of all elements, otherwise it replaces the text content of each elements.
@@ -147,5 +155,16 @@ _since 0.0.1_
 `toggle()` -> `self`
 
 Toggles between showing and hiding of the elements based on their on `display` property of first element in collection.
+
+
+##### val
+_since 0.0.2_
+
+`val()` -> `string`
+
+`val(value)` -> `self`
+
+Gets or sets value of form control. If no value is defined, it returns value of first element, otherwise it sets value for all elements in collection.
+
 
 ![](http://pbfcomics.com/wp-content/uploads/2016/04/PBF145-Nunez.jpg)
