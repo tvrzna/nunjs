@@ -1,4 +1,4 @@
-/* nunjs 0.0.1 */
+/* nunjs 0.0.2 */
 Nunjs = {
 	each: function(obj, callback) {
 	var length, i = 0;
@@ -200,4 +200,33 @@ window.$ = function(selector) {
 		nunjs.length = i;
 	});
 	return nunjs;
+};
+
+window.$.ajax = function(options) {
+	var xhttp = new XMLHttpRequest();
+
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4) {
+			if (this.status == 200 && options.success !== undefined) {
+				options.success(this.responseText, this);
+			} else {
+				if (options.error !== undefined) {
+					options.error(this);
+				}
+			}
+			if (options.complete !== undefined) {
+				options.complete();
+			}
+		}
+	};
+	xhttp.open(options.type !== undefined ? options.type : 'GET', options.url, options.async !== undefined ? options.async : true);
+
+	if (options.headers !== undefined) {
+		for (var name in options.headers) {
+			xhttp.setRequestHeader(name, options.headers[name]);
+		}
+	}
+
+	xhttp.send(options.data ? options.data : null);
+	return xhttp;
 };

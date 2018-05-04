@@ -11,6 +11,22 @@ _since 0.0.1_
 
 Add class to each element.
 
+##### ajax
+_since 0.0.2_
+
+`ajax(options)`
+
+Performs an Ajax request.
+
+`async` boolean, default `true`
+`complete` function
+`data` string
+`error` function(xhttp)
+`headers` {}
+`success` function(responseText, xhttp)
+`type` string, default `GET`
+`url` string
+
 ##### attr
 _since 0.0.1_
 
