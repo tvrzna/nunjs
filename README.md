@@ -119,6 +119,13 @@ _since 0.0.1_
 
 Attach an event handler for the `DOMContentLoaded`, that is fired when the page is ready.
 
+##### removeAttr
+_since 0.0.3_
+
+`removeAttr(name)` -> `self`
+
+Removes specified attribute from all elements in the collection.
+
 ##### removeClass
 _since 0.0.1_
 

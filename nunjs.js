@@ -163,6 +163,13 @@ window.$ = function(selector) {
 			});
 			return this;
 		},
+		removeAttr: function(name) {
+			this.each(function() {
+				this.removeAttribute(name);
+			});
+			return this;
+		}
+		,
 		show: function() {
 			this.each(function() {
 				this.style.display == 'none' && (this.style.display = '');
