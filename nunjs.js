@@ -156,6 +156,11 @@ window.$ = function(selector) {
 			});
 			return this;
 		},
+		remove: function() {
+			this.each(function() {
+				this.remove();
+			});
+		},
 		removeClass: function(name) {
 			this.each(function() {
 				if (this.classList.contains(name))

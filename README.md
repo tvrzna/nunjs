@@ -119,6 +119,13 @@ _since 0.0.1_
 
 Attach an event handler for the `DOMContentLoaded`, that is fired when the page is ready.
 
+##### remove
+_since 0.0.3_
+
+`remove()` -> `void`
+
+Removes all elements in the collection.
+
 ##### removeAttr
 _since 0.0.3_
 
