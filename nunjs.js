@@ -1,4 +1,8 @@
-/* nunjs 0.0.2 */
+/**
+	nunjs 0.0.3
+
+	https://github.com/tvrzna/nunjs
+**/
 Nunjs = {
 	each: function(obj, callback) {
 		var length, i = 0;
