@@ -34,6 +34,13 @@ Performs an Ajax request.
 
 `url` string
 
+##### appendTo
+_since 0.0.3_
+
+`appendTo(selector)` -> `collection`
+
+Appends collection as last into each element found by selector.
+
 ##### attr
 _since 0.0.1_
 
@@ -51,6 +58,13 @@ _since 0.0.1_
 `click(trigger)` -> `self`
 
 If `trigger` is not defined, it performs click on each element, otherwise it adds event listener.
+
+##### clone
+_since 0.0.3_
+
+`clone()` -> `collection`
+
+Performs deep copy of each element and return clones as collection.
 
 ##### each
 _since 0.0.1_
@@ -111,6 +125,13 @@ _since 0.0.1_
 `parent(selector)` -> `collection`
 
 If `selector` is not defined, it returns collection of parents of all elements, otherwise it returns collection of parents (on any level) matching selector.
+
+##### prependTo
+_since 0.0.3_
+
+`appendTo(selector)` -> `collection`
+
+Appends collection as first into each element found by selector.
 
 ##### ready
 _since 0.0.1_

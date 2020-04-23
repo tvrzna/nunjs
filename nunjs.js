@@ -47,6 +47,19 @@ window.$ = function(selector) {
 			});
 			return this;
 		},
+		appendTo: function(selector) {
+			var target = 'string' == typeof selector ? document.querySelectorAll(selector) : selector;
+			var result = [];
+
+			this.each(function() {
+				for(var i = 0; i <= target.length; i++) {
+					var copy = this.cloneNode(true);
+					target[i].appendChild(copy);
+					result.push(copy);
+				}
+			});
+			return $(result);
+		},
 		attr: function(attr, value) {
 			if (value === null || value === undefined) {
 				return this[0].getAttribute(attr);
@@ -68,6 +81,14 @@ window.$ = function(selector) {
 				});
 			}
 			return this;
+		},
+		clone: function() {
+			var result = [];
+			this.each(function () {
+				var clone = this.cloneNode(true);
+				result.push(clone);
+			});
+			return $(result);
 		},
 		each: function(callback) {
 			Nunjs.each(dom, callback);
@@ -146,6 +167,19 @@ window.$ = function(selector) {
 							parent = parent.parentNode;
 						} while(parent !== 'undefined');
 					}
+				}
+			});
+			return $(result);
+		},
+		prependTo: function(selector) {
+			var target = 'string' == typeof selector ? document.querySelectorAll(selector) : selector;
+			var result = [];
+
+			this.each(function() {
+				for(var i = 0; i <= target.length; i++) {
+					var copy = this.cloneNode(true);
+					target[i].insertBefore(copy, target[i].childNodes[0]);
+					result.push(copy);
 				}
 			});
 			return $(result);
