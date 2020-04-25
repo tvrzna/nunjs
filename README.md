@@ -104,14 +104,14 @@ Checks first element of collection matches the CSS selector.
 ##### insertAfter
 _since 0.0.3_
 
-`appendTo(selector)` -> `collection`
+`insertAfter(selector)` -> `collection`
 
 Inserts copy of collection after each element found by selector.
 
 ##### insertBefore
 _since 0.0.3_
 
-`appendTo(selector)` -> `collection`
+`insertBefore(selector)` -> `collection`
 
 Inserts copy of collection before each element found by selector.
 
