@@ -101,6 +101,13 @@ _since 0.0.1_
 
 Checks first element of collection matches the CSS selector.
 
+##### nunjs
+_since 0.0.3_
+
+`nunjs` -> `version`
+
+Not a function, just a property, that signals current version of library.
+
 ##### off
 _since 0.0.1_
 

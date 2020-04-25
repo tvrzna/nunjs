@@ -39,6 +39,7 @@ _events = {};
 window.$ = function(selector) {
 	var dom = 'string' == typeof selector ? document.querySelectorAll(selector) : selector;
 	var nunjs = {
+		nunjs: '0.0.3',
 		addClass: function(name) {
 			this.each(function() {
 				if (!this.classList.contains(name)) {
