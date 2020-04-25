@@ -121,6 +121,32 @@ window.$ = function(selector) {
 			});
 			return this;
 		},
+		insertAfter: function(selector) {
+			var target = 'string' == typeof selector ? document.querySelectorAll(selector) : selector;
+			var result = [];
+
+			this.each(function() {
+				for(var i = 0; i <= target.length; i++) {
+					var copy = this.cloneNode(true);
+					target.parent()[0].insertBefore(copy, target[i].nextSibling);
+					result.push(copy);
+				}
+			});
+			return $(result);
+		},
+		insertBefore: function(selector) {
+			var target = 'string' == typeof selector ? document.querySelectorAll(selector) : selector;
+			var result = [];
+
+			this.each(function() {
+				for(var i = 0; i <= target.length; i++) {
+					var copy = this.cloneNode(true);
+					target.parent()[0].insertBefore(copy, target[i]);
+					result.push(copy);
+				}
+			});
+			return $(result);
+		},
 		is: function(selector) {
 			return Nunjs.matches(this[0], selector);
 		},
