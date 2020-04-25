@@ -64,7 +64,7 @@ window.$ = function(selector) {
 			if (value === null || value === undefined) {
 				return this[0].getAttribute(attr);
 			} else {
-				this.each(dom, function() {
+				this.each(function() {
 					this.setAttribute(attr, value);
 				});
 				return this;
