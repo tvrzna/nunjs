@@ -184,6 +184,16 @@ window.$ = function(selector) {
 			});
 			return $(result);
 		},
+		prop: function(prop, value) {
+			if (value === null || value === undefined) {
+				return this[0][prop];
+			} else {
+				this.each(function() {
+					this[prop] = value;
+				});
+				return this;
+			}
+		},
 		ready: function(trigger){
 			this.each(function() {
 				this.addEventListener('DOMContentLoaded', trigger);
@@ -207,8 +217,13 @@ window.$ = function(selector) {
 				this.removeAttribute(name);
 			});
 			return this;
-		}
-		,
+		},
+		removeProp: function(prop) {
+			this.each(function() {
+				this[prop] = undefined;
+			});
+			return this;
+		},
 		show: function() {
 			this.each(function() {
 				this.style.display == 'none' && (this.style.display = '');

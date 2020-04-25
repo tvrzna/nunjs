@@ -133,6 +133,15 @@ _since 0.0.3_
 
 Appends collection as first into each element found by selector.
 
+##### prop
+_since 0.0.3_
+
+`prop(property_name)` -> `value`
+
+`prop(property_name, value)` -> `self`
+
+Read or set DOM property of each element. If `value` is not defined, it returns property of first element, otherwise it sets property to each element.
+
 ##### ready
 _since 0.0.1_
 
@@ -160,6 +169,13 @@ _since 0.0.1_
 `removeClass(name)` -> `self`
 
 Removes specified class from all elements in the collection.
+
+##### removeProp
+_since 0.0.3_
+
+`removeProp(property_name)` -> `self`
+
+Removes specified property from all elements in the collection.
 
 ##### show
 _since 0.0.1_
