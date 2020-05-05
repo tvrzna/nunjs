@@ -123,7 +123,7 @@ window.$ = function(selector) {
 		},
 		html: function(content) {
 			if (content === undefined) {
-				return this.innerHTML;
+				return this[0].innerHTML;
 			}
 			this.each(function() {
 				this.innerHTML = content;
