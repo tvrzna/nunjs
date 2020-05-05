@@ -94,6 +94,15 @@ _since 0.0.1_
 
 Hides elements in collection by setting `display` to `none`.
 
+##### html
+_since 0.0.3_
+
+`html()` -> `string`
+
+`html(content)` -> `self`
+
+Read or set inner HTML of each element. If `content` is not defined, it returns HTML of first element, otherwise it sets HTML to each element.
+
 ##### is
 _since 0.0.1_
 

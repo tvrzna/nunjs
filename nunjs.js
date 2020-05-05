@@ -121,6 +121,15 @@ window.$ = function(selector) {
 			});
 			return this;
 		},
+		html: function(content) {
+			if (content === undefined) {
+				return this.innerHTML;
+			}
+			this.each(function() {
+				this.innerHTML = content;
+			});
+			return this;
+		},
 		insertAfter: function(selector) {
 			var target = 'string' == typeof selector ? document.querySelectorAll(selector) : selector;
 			var result = [];
