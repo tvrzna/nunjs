@@ -1,5 +1,5 @@
 /**
-	nunjs 0.0.3
+	nunjs 0.0.4
 
 	https://github.com/tvrzna/nunjs
 **/
