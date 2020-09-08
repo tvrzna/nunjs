@@ -87,6 +87,13 @@ _since 0.0.1_
 
 Checks if any element in collection has specified class.
 
+##### hasEvent
+_since 0.0.4_
+
+`hasEvent(name)` -> `boolean`
+
+Checks if first element in collection has specified event.
+
 ##### hide
 _since 0.0.1_
 

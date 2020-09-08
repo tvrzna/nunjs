@@ -31,10 +31,9 @@ Nunjs = {
 								obj.matchesSelector || obj.msMatchesSelector;
 		if (matchesSelector) return matchesSelector.call(obj, selector);
 		return false;
-	}
+	},
+	'_events' : {}
 };
-
-_events = {};
 
 window.$ = function(selector) {
 	var dom = 'string' == typeof selector ? document.querySelectorAll(selector) : selector;
@@ -115,6 +114,9 @@ window.$ = function(selector) {
 			});
 			return result;
 		},
+		hasEvent: function(event) {
+			return Nunjs._events[this[0]] !== undefined && Nunjs._events[this[0]][event] !== undefined;
+		},
 		hide: function() {
 			this.each(function() {
 				this.style.display = 'none';
@@ -162,8 +164,8 @@ window.$ = function(selector) {
 		off: function(event, trigger) {
 			this.each(function() {
 				if (trigger === undefined) {
-					for (var i = 0; i < _events[this][event].length; i++) {
-						this.removeEventListener(event, _events[this][event][i]);
+					for (var i = 0; i < Nunjs._events[this][event].length; i++) {
+						this.removeEventListener(event, Nunjs._events[this][event][i]);
 					}
 				} else {
 					this.removeEventListener(event, trigger);
@@ -173,9 +175,9 @@ window.$ = function(selector) {
 		},
 		on: function(event, trigger) {
 			this.each(function() {
-				if (!(this in _events)) _events[this] = {};
-				if (!(event in _events[this])) _events[this][event] = [];
-				_events[this][event].push(trigger);
+				if (!(this in Nunjs._events)) Nunjs._events[this] = {};
+				if (!(event in Nunjs._events[this])) Nunjs._events[this][event] = [];
+				Nunjs._events[this][event].push(trigger);
 				this.addEventListener(event, trigger);
 			});
 			return this;
