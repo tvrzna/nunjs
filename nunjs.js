@@ -38,7 +38,7 @@ Nunjs = {
 window.$ = function(selector) {
 	var dom = 'string' == typeof selector ? document.querySelectorAll(selector) : selector;
 	var nunjs = {
-		nunjs: '0.0.3',
+		nunjs: '0.0.4',
 		addClass: function(name) {
 			this.each(function() {
 				if (!this.classList.contains(name)) {
@@ -320,8 +320,10 @@ window.$.ajax = function(options) {
 
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4) {
-			if (this.status == 200 && options.success !== undefined) {
-				options.success(this.responseText, this);
+			if (this.status == 200) {
+				if (options.success !== undefined) {
+					options.success(this.responseText, this);
+				}
 			} else {
 				if (options.error !== undefined) {
 					options.error(this);
@@ -340,6 +342,16 @@ window.$.ajax = function(options) {
 		}
 	}
 
-	xhttp.send(options.data ? options.data : null);
+	if (options.data) {
+		var body;
+		switch (typeof options.data) {
+			case 'object':
+				body = JSON.stringify(options.data);
+				break;
+			default:
+				body = options.data;
+		}
+		xhttp.send(body);
+	}
 	return xhttp;
 };
