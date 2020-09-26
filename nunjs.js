@@ -352,6 +352,8 @@ window.$.ajax = function(options) {
 				body = options.data;
 		}
 		xhttp.send(body);
+	} else {
+		xhttp.send();
 	}
 	return xhttp;
 };
