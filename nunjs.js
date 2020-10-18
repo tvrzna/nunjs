@@ -36,7 +36,20 @@ Nunjs = {
 };
 
 window.$ = function(selector) {
-	var dom = 'string' == typeof selector ? document.querySelectorAll(selector) : selector;
+	var dom = 'string' == typeof selector ? (selector.startsWith('<') && selector.endsWith('>') ? "lol" : document.querySelectorAll(selector)) : selector;
+
+	if (typeof selector === 'string') {
+		if (selector.startsWith('<') && selector.endsWith('>')) {
+			var tmp = document.createElement('tmp');
+			tmp.innerHTML = selector.trim();
+			dom = tmp.firstChild;
+		} else {
+			dom = document.querySelectorAll(selector);
+		}
+	} else {
+		dom = selector;
+	}
+
 	var nunjs = {
 		nunjs: '0.0.4',
 		addClass: function(name) {
