@@ -36,7 +36,7 @@ Nunjs = {
 };
 
 window.$ = function(selector) {
-	var dom = 'string' == typeof selector ? (selector.startsWith('<') && selector.endsWith('>') ? "lol" : document.querySelectorAll(selector)) : selector;
+	var dom;
 
 	if (typeof selector === 'string') {
 		if (selector.startsWith('<') && selector.endsWith('>')) {
