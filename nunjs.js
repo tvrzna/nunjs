@@ -39,7 +39,7 @@ window.$ = function(selector) {
 	var dom;
 
 	if (typeof selector === 'string') {
-		if (selector.startsWith('<') && selector.endsWith('>')) {
+		if (selector.trim().startsWith('<') && selector.trim().endsWith('>')) {
 			var tmp = document.createElement('tmp');
 			tmp.innerHTML = selector.trim();
 			dom = tmp.firstChild;
