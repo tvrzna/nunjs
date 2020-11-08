@@ -180,6 +180,7 @@ window.$ = function(selector) {
 					for (var i = 0; i < Nunjs._events[this][event].length; i++) {
 						this.removeEventListener(event, Nunjs._events[this][event][i]);
 					}
+					Nunjs._events[this][event] = [];
 				} else {
 					this.removeEventListener(event, trigger);
 				}
@@ -253,6 +254,7 @@ window.$ = function(selector) {
 		},
 		remove: function() {
 			this.each(function() {
+				Nunjs._events[this] = [];
 				this.remove();
 			});
 		},
