@@ -2,6 +2,8 @@
 	nunjs 0.0.4
 
 	https://github.com/tvrzna/nunjs
+
+	Released under the MIT License.
 **/
 Nunjs = {
 	each: function(obj, callback) {
@@ -330,7 +332,22 @@ window.$ = function(selector) {
 	return nunjs;
 };
 
-window.$.ajax = function(options) {
+window.$.ajax = function(arg1, arg2, type) {
+	var options;
+	if (typeof arg1 === 'object') {
+		options = arg1;
+	} else if (arg2 === 'object') {
+		options = arg2;
+	} else {
+		options = {};
+	}
+	if (typeof arg1 === 'string') {
+		options.url = arg1;
+	}
+	if (type !== undefined && typeof type === 'string') {
+		options.type = type;
+	}
+
 	var xhttp = new XMLHttpRequest();
 
 	xhttp.onreadystatechange = function() {
@@ -371,4 +388,16 @@ window.$.ajax = function(options) {
 		xhttp.send();
 	}
 	return xhttp;
+};
+
+window.$.post = function(arg1, arg2) {
+	return window.$.ajax(arg1, arg2, 'POST');
+};
+
+window.$.get = function(arg1, arg2) {
+	return window.$.ajax(arg1, arg2, 'GET');
+};
+
+window.$.put = function(arg1, arg2) {
+	return window.$.ajax(arg1, arg2, 'PUT');
 };

@@ -16,6 +16,10 @@ _since 0.0.2_
 
 `ajax(options)` -> `xhttp`
 
+_since 0.0.4_
+
+`ajax(url, options)` -> `xhttp`
+
 Performs an Ajax request.
 
 `async` boolean, default `true`
@@ -33,6 +37,24 @@ Performs an Ajax request.
 `type` string, default `GET`
 
 `url` string
+
+###### get
+_since 0.0.4_
+`get(url, options)` -> `xhttp`
+
+Shortcut for ajax request with GET type.
+
+###### post
+_since 0.0.4_
+`post(url, options)` -> `xhttp`
+
+Shortcut for ajax request with POST type.
+
+###### put
+_since 0.0.4_
+`put(url, options)` -> `xhttp`
+
+Shortcut for ajax request with PUT type.
 
 ##### appendTo
 _since 0.0.3_
