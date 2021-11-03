@@ -336,7 +336,7 @@ window.$.ajax = function(arg1, arg2, type) {
 	var options;
 	if (typeof arg1 === 'object') {
 		options = arg1;
-	} else if (arg2 === 'object') {
+	} else if (typeof arg2 === 'object') {
 		options = arg2;
 	} else {
 		options = {};
