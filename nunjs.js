@@ -1,5 +1,5 @@
 /**
-	nunjs 0.0.4
+	nunjs 0.0.5
 
 	https://github.com/tvrzna/nunjs
 
@@ -53,7 +53,7 @@ window.$ = function(selector) {
 	}
 
 	var nunjs = {
-		nunjs: '0.0.4',
+		nunjs: '0.0.5',
 		addClass: function(name) {
 			this.each(function() {
 				if (!this.classList.contains(name)) {
