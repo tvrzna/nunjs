@@ -34,6 +34,10 @@ Nunjs = {
 		if (matchesSelector) return matchesSelector.call(obj, selector);
 		return false;
 	},
+	removeWithChildren : function (i, el) {
+		$(el).find('*').each(Nunjs.removeWithChildren);
+		$(el).remove();
+	},
 	'_events' : {}
 };
 
@@ -142,6 +146,7 @@ window.$ = function(selector) {
 			if (content === undefined) {
 				return this[0].innerHTML;
 			}
+			this.find('*').each(Nunjs.removeWithChildren);
 			this.each(function() {
 				this.innerHTML = content;
 			});
