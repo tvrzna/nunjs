@@ -6,7 +6,7 @@
 	Released under the MIT License.
 **/
 Nunjs = {
-	each: function(obj, callback) {
+	each: (obj, callback) => {
 		var length, i = 0;
 		if (Array.isArray(obj) || obj instanceof NodeList) {
 			length = obj.length;
@@ -20,13 +20,13 @@ Nunjs = {
 		}
 		return obj;
 	},
-	includes: function(arr, el) {
+	includes: (arr, el) => {
 		if (arr && el) {
 			return arr.indexOf(el) >= 0;
 		}
 		return false;
 	},
-	matches: function(obj, selector) {
+	matches: (obj, selector) => {
 		if (!selector || !obj || obj.nodeType !== 1) return false;
 		var matchesSelector = obj.matches || obj.webkitMatchesSelector ||
 								obj.mozMatchesSelector || obj.oMatchesSelector ||
@@ -34,14 +34,14 @@ Nunjs = {
 		if (matchesSelector) return matchesSelector.call(obj, selector);
 		return false;
 	},
-	removeWithChildren : function (i, el) {
+	removeWithChildren: (i, el) => {
 		$(el).find('*').each(Nunjs.removeWithChildren);
 		$(el).remove();
 	},
 	'_events' : {}
 };
 
-window.$ = function(selector) {
+window.$ = (selector) =>{
 	var dom;
 
 	if (typeof selector === 'string') {
@@ -58,19 +58,19 @@ window.$ = function(selector) {
 
 	var nunjs = {
 		nunjs: '0.0.5',
-		addClass: function(name) {
-			this.each(function() {
+		addClass: name => {
+			this.each(() => {
 				if (!this.classList.contains(name)) {
 					this.classList.add(name);
 				}
 			});
 			return this;
 		},
-		appendTo: function(selector) {
+		appendTo: selector => {
 			var target = 'string' == typeof selector ? document.querySelectorAll(selector) : selector;
 			var result = [];
 
-			this.each(function() {
+			this.each(() => {
 				for(var i = 0; i <= target.length; i++) {
 					var copy = this.cloneNode(true);
 					target[i].appendChild(copy);
@@ -79,43 +79,43 @@ window.$ = function(selector) {
 			});
 			return $(result);
 		},
-		attr: function(attr, value) {
+		attr: (attr, value) => {
 			if (value === null || value === undefined) {
 				return this[0].getAttribute(attr);
 			} else {
-				this.each(function() {
+				this.each(() => {
 					this.setAttribute(attr, value);
 				});
 				return this;
 			}
 		},
-		click: function(trigger) {
+		click: trigger => {
 			if (trigger === null || typeof trigger !== 'function') {
-				this.each(function() {
+				this.each(() => {
 					this.click();
 				});
 			} else {
-				this.each(function(i, el) {
+				this.each((i, el) => {
 					$(el).on('click', trigger);
 				});
 			}
 			return this;
 		},
-		clone: function() {
+		clone: () => {
 			var result = [];
-			this.each(function () {
+			this.each(() => {
 				var clone = this.cloneNode(true);
 				result.push(clone);
 			});
 			return $(result);
 		},
-		each: function(callback) {
+		each: callback => {
 			Nunjs.each(dom, callback);
 			return this;
 		},
-		find: function(selector) {
+		find: selector => {
 			var result = [];
-			this.each(function() {
+			this.each(() => {
 				var data = this.querySelectorAll(selector);
 				for(var i=0; i < data.length; i++) {
 					if (!Nunjs.includes(result, data[i]))
@@ -124,39 +124,39 @@ window.$ = function(selector) {
 			});
 			return $(result);
 		},
-		hasClass: function(name) {
+		hasClass: name => {
 			var result = false;
-			this.each(function() {
+			this.each(() => {
 				if (this.classList.contains(name))
 					result = true;
 				return;
 			});
 			return result;
 		},
-		hasEvent: function(event) {
+		hasEvent: event => {
 			return Nunjs._events[this[0]] !== undefined && Nunjs._events[this[0]][event] !== undefined;
 		},
-		hide: function() {
-			this.each(function() {
+		hide: () => {
+			this.each(() => {
 				this.style.display = 'none';
 			});
 			return this;
 		},
-		html: function(content) {
+		html: content => {
 			if (content === undefined) {
 				return this[0].innerHTML;
 			}
 			this.find('*').each(Nunjs.removeWithChildren);
-			this.each(function() {
+			this.each(() => {
 				this.innerHTML = content;
 			});
 			return this;
 		},
-		insertAfter: function(selector) {
+		insertAfter: selector => {
 			var target = 'string' == typeof selector ? document.querySelectorAll(selector) : selector;
 			var result = [];
 
-			this.each(function() {
+			this.each(() => {
 				for(var i = 0; i <= target.length; i++) {
 					var copy = this.cloneNode(true);
 					target.parent()[0].insertBefore(copy, target[i].nextSibling);
@@ -165,11 +165,11 @@ window.$ = function(selector) {
 			});
 			return $(result);
 		},
-		insertBefore: function(selector) {
+		insertBefore: selector => {
 			var target = 'string' == typeof selector ? document.querySelectorAll(selector) : selector;
 			var result = [];
 
-			this.each(function() {
+			this.each(() => {
 				for(var i = 0; i <= target.length; i++) {
 					var copy = this.cloneNode(true);
 					target.parent()[0].insertBefore(copy, target[i]);
@@ -178,11 +178,11 @@ window.$ = function(selector) {
 			});
 			return $(result);
 		},
-		is: function(selector) {
+		is: selector => {
 			return Nunjs.matches(this[0], selector);
 		},
-		off: function(event, trigger) {
-			this.each(function() {
+		off: (event, trigger) => {
+			this.each(() => {
 				if (trigger === undefined) {
 					for (var i = 0; i < Nunjs._events[this][event].length; i++) {
 						this.removeEventListener(event, Nunjs._events[this][event][i]);
@@ -194,8 +194,8 @@ window.$ = function(selector) {
 			});
 			return this;
 		},
-		on: function(event, trigger) {
-			this.each(function() {
+		on: (event, trigger) => {
+			this.each(() => {
 				if (!(this in Nunjs._events)) Nunjs._events[this] = {};
 				if (!(event in Nunjs._events[this])) Nunjs._events[this][event] = [];
 				Nunjs._events[this][event].push(trigger);
@@ -203,9 +203,9 @@ window.$ = function(selector) {
 			});
 			return this;
 		},
-		parent: function(selector) {
+		parent: selector => {
 			var result = [];
-			this.each(function(i, el) {
+			this.each((i, el) => {
 				if (el.parentElement === undefined)
 					return;
 
@@ -230,11 +230,11 @@ window.$ = function(selector) {
 			});
 			return $(result);
 		},
-		prependTo: function(selector) {
+		prependTo: selector => {
 			var target = 'string' == typeof selector ? document.querySelectorAll(selector) : selector;
 			var result = [];
 
-			this.each(function() {
+			this.each(() => {
 				for(var i = 0; i <= target.length; i++) {
 					var copy = this.cloneNode(true);
 					target[i].insertBefore(copy, target[i].childNodes[0]);
@@ -243,64 +243,64 @@ window.$ = function(selector) {
 			});
 			return $(result);
 		},
-		prop: function(prop, value) {
+		prop: (prop, value) => {
 			if (value === null || value === undefined) {
 				return this[0][prop];
 			} else {
-				this.each(function() {
+				this.each(() => {
 					this[prop] = value;
 				});
 				return this;
 			}
 		},
-		ready: function(trigger){
-			this.each(function() {
+		ready: trigger => {
+			this.each(() => {
 				this.addEventListener('DOMContentLoaded', trigger);
 			});
 			return this;
 		},
-		remove: function() {
-			this.each(function() {
+		remove: () => {
+			this.each(() => {
 				Nunjs._events[this] = [];
 				this.remove();
 			});
 		},
-		removeClass: function(name) {
-			this.each(function() {
+		removeClass: name => {
+			this.each(() => {
 				if (this.classList.contains(name))
 					this.classList.remove(name);
 			});
 			return this;
 		},
-		removeAttr: function(name) {
-			this.each(function() {
+		removeAttr: name => {
+			this.each(() => {
 				this.removeAttribute(name);
 			});
 			return this;
 		},
-		removeProp: function(prop) {
-			this.each(function() {
+		removeProp: prop => {
+			this.each(() => {
 				this[prop] = undefined;
 			});
 			return this;
 		},
-		show: function() {
-			this.each(function() {
+		show: () => {
+			this.each(() => {
 				this.style.display == 'none' && (this.style.display = '');
 				if (getComputedStyle(this, '').getPropertyValue('display') == 'none')
 					this.style.display = 'block';
 			});
 			return this;
 		},
-		submit: function() {
-			this.each(function() {
+		submit: () => {
+			this.each(() => {
 				this.submit();
 			});
 			return this;
 		},
-		text: function(content) {
+		text: content => {
 			var resultText = "";
-			this.each(function() {
+			this.each(() => {
 				if (content === undefined)
 					resultText += this.textContent;
 				else
@@ -311,18 +311,18 @@ window.$ = function(selector) {
 			}
 			return this;
 		},
-		toggle: function() {
+		toggle: () => {
 			var show = getComputedStyle(this[0], '').getPropertyValue('display') == 'none';
-			this.each(function() {
+			this.each(() => {
 				show ? $(this).show() : $(this).hide();
 			});
 			return this;
 		},
-		val: function(value) {
+		val: value => {
 			if (value === undefined) {
 				return this[0].value;
 			} else {
-				this.each(function() {
+				this.each(() => {
 					this.value = value;
 				});
 				return this;
@@ -330,14 +330,14 @@ window.$ = function(selector) {
 		}
 	};
 	nunjs.length = 0;
-	Nunjs.each(dom, function(i, el) {
+	Nunjs.each(dom, (i, el) => {
 		nunjs[i] = el;
 		nunjs.length = i;
 	});
 	return nunjs;
 };
 
-window.$.ajax = function(arg1, arg2, type) {
+window.$.ajax = (arg1, arg2, type) => {
 	var options;
 	if (typeof arg1 === 'object') {
 		options = arg1;
@@ -355,7 +355,7 @@ window.$.ajax = function(arg1, arg2, type) {
 
 	var xhttp = new XMLHttpRequest();
 
-	xhttp.onreadystatechange = function() {
+	xhttp.onreadystatechange = () => {
 		if (this.readyState == 4) {
 			if (this.status == 200) {
 				if (options.success !== undefined) {
@@ -395,14 +395,14 @@ window.$.ajax = function(arg1, arg2, type) {
 	return xhttp;
 };
 
-window.$.post = function(arg1, arg2) {
+window.$.post = (arg1, arg2) => {
 	return window.$.ajax(arg1, arg2, 'POST');
 };
 
-window.$.get = function(arg1, arg2) {
+window.$.get = (arg1, arg2) => {
 	return window.$.ajax(arg1, arg2, 'GET');
 };
 
-window.$.put = function(arg1, arg2) {
+window.$.put = (arg1, arg2) => {
 	return window.$.ajax(arg1, arg2, 'PUT');
 };
